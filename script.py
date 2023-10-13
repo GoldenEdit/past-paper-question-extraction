@@ -96,7 +96,7 @@ def print_progress_bar(iteration, total, length=50):
     print(f'[{arrow + spaces}] {int(percent * 100)}%', end='\r')
 
 # Directory containing the PDF files
-pdf_directory = "./"
+pdf_directory = "./past-papers"
 
 # Loop through each PDF file in the directory
 for index, pdf_filename in enumerate(os.listdir(pdf_directory)):
