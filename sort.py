@@ -51,7 +51,7 @@ def on_mousewheel(event):
 image_files = []
 for dirpath, _, filenames in os.walk('./images'):
     for filename in filenames:
-        if filename.endswith('.png'):
+        if filename.endswith('.png') and 'q_' in filename:
             image_files.append(os.path.join(dirpath, filename))
 
 # Initialize tkinter window
