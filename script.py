@@ -16,10 +16,12 @@ def perform_ocr_on_column_exclude_footer(image_path, col_range, footer_height, c
         img_cropped = img.crop((col_range[0], 0, col_range[1], img.height - footer_height))
 
         # Preprocessing
-        img_cropped = img_cropped.convert('L')  # Convert to grayscale
-        img_cropped = img_cropped.filter(ImageFilter.MedianFilter(size=3))  # Apply noise reduction
-        img_cropped = ImageEnhance.Contrast(img_cropped).enhance(2.0)  # Increase contrast
-        img_cropped = img_cropped.point(lambda x: 0 if x < 128 else 255, '1')  # Binarize
+        # img_cropped = img_cropped.convert('L')  # Convert to grayscale
+        # img_cropped = img_cropped.filter(ImageFilter.MedianFilter(size=3))  # Apply noise reduction
+        # img_cropped = ImageEnhance.Contrast(img_cropped).enhance(2.0)  # Increase contrast
+        # img_cropped = img_cropped.point(lambda x: 0 if x < 128 else 255, '1')  # Binarize
+        rand = random.randint(1, 1000)
+        img_cropped.save(f"debug_preprocessed_image_{rand}.png")  # Save the preprocessed image for debugging
 
         text = pytesseract.image_to_string(img_cropped, config=config)
     return text
@@ -49,7 +51,7 @@ def process_pdf_file(pdf_path, output_directory, paper):
 
     # OCR Configurations
     ocr_config = '--psm 6 -c tessedit_char_whitelist=123456789'
-    col_range = (125, 155)
+    col_range = (135, 160)
     footer_height = 200
 
     # Perform OCR and Crop Questions
@@ -70,6 +72,7 @@ def process_pdf_file(pdf_path, output_directory, paper):
                 img_cropped = img.crop((col_range[0], 0, img.width, img.height - footer_height))
                 question_image_path = os.path.join(output_directory, f'question_{current_question}_page_{page_number}.png')
                 img_cropped.save(question_image_path)
+                
                 if current_question not in saved_question_images:
                     saved_question_images[current_question] = []
                 saved_question_images[current_question].append(question_image_path)
