@@ -39,7 +39,7 @@ Install requirements:
 ## Usage
 
 - Place Past Papers in `./past-papers`
-  - If Past Papers do not have Question numbers at the same distance from the left edge of the page, as they do in CIE 9816, you will need to adjust `col_range = (125, 155)` in `script.py`
+  - If Past Papers do not have Question numbers at the same distance from the left edge of the page, as they do in CIE 9618, you will need to adjust `col_range = (125, 155)` in `script.py`
   - This also requires the column on the pages only contains question numbers, nothing else (at least no other numbers 1 - 9)
 - Run the script e.g. `python3 script.py`
 
