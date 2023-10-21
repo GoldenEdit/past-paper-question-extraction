@@ -5,7 +5,9 @@ from tkinter import Tk, Canvas, PhotoImage, Button, Scrollbar, VERTICAL
 # Function to get possible units for a question based on the paper
 def get_possible_units(filename):
     paper_info = filename.split("_")
-    paper_number = int(paper_info[3][1])
+    paper_number = int(paper_info[3][0])
+    print(paper_info)
+    print(paper_number)
     
     units = []
     if paper_number == 1:
